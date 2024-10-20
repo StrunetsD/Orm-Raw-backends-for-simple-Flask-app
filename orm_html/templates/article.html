@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ article.title }}</h1>
+<p>{{ article.content }}</p>
+<p><em>Создано: {{ article.created_at }}</em></p>
+
+<a href="/">Назад</a>
+<h2>Комментарии</h2>
+<div id="comments">
+    {% for comment in comments %}
+    <div class="comment">
+        <p><strong>{{ comment.author_name }}</strong> ({{ comment.created_at }}):</p>
+        <p>{{ comment.content }}</p>
+    </div>
+    {% else %}
+    <p>Нет комментариев.</p>
+    {% endfor %}
+</div>
+
+<h2>Добавить комментарий</h2>
+<form action="" method="POST">
+    <label for="author_name">Имя:</label>
+    <input id="author_name" name="author_name" required>
+
+    <label for="content">Комментарий:</label>
+    <textarea id="content" name="content" required></textarea>
+    <button type="submit">Добавить комментарий</button>
+</form>
+{% endblock %}

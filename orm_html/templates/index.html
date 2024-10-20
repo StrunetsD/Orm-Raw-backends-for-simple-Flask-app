@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Список статей{% endblock %}
+
+{% block content %}
+<h1>Список статей</h1>
+
+<div id="posts">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="post">
+            <h2><a href="/articles/{{ article.id }}">{{ article.title }}</a></h2>
+            <p>{{ article.content[:100] }}...</p>
+            <p><em>Создано: {{ article.created_at }}</em></p>
+            <form action="/editing/{{ article.id }}" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-primary">Редактировать</button>
+            </form>
+            <form action="/delete/{{ article.id }}" method="POST" style="display: inline;">
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет доступных статей.</p>
+    {% endif %}
+</div>
+
+<div class="form-container">
+    <h2>Создать новую статью</h2>
+    <form action="/create_article" method="POST">
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="content">Содержание:</label>
+        <textarea id="content" name="content" required></textarea>
+
+        <button type="submit">Создать статью</button>
+    </form>
+</div>
+{% endblock %}

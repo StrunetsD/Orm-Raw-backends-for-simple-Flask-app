@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/style.css">
+    <title>Блог</title>
+    </head>
+   <div class="header">
+   <h1><a href="/raw_html/static">Articles </a></h1>
+    </div>
+<body>
+
+<h1>Список статей</h1>
+<div id="posts">
+    {% for article in articles %}
+    <div class="post">
+        <h2><a href="/articles/{{ article[0] }}">{{ article[1] }}</a></h2>
+        <p>{{ article[2][:100] }}...</p>
+        <p><em>Создано: {{ article[3] }}</em></p>
+         <form action="/editing/{{ article[0] }}" method="GET" style="display: inline;">
+    <button type="submit" class="btn btn-primary">Редактировать</button>
+</form>
+        <form action="/delete/{{ article[0] }}" method="POST"  style="display: inline;">
+        <button type="submit">Удалить</button>
+        </form>
+    </div>
+    {% else %}
+    <p>Нет доступных статей.</p>
+    {% endfor %}
+</div>
+
+
+<div class="form-container">
+    <h2>Создать новую статью</h2>
+    <form action="/create_article" method="POST">
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="content">Содержание:</label>
+        <textarea id="content" name="content" required></textarea>
+
+        <button type="submit">Создать статью</button>
+    </form>
+</div>
+</body>
+</html>

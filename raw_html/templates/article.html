@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/style.css">
+    <title>{{ article[1] }}</title>
+</head>
+<body>
+<div class="header">
+   <h1><a href="/raw_html/static">Articles </a></h1>
+    </div>
+
+<h1>{{ article[1] }}</h1>
+<p>{{ article[2] }}</p>
+<p><em>Создано: {{ article[3] }}</em></p>
+
+
+ <a href="/raw_html/static">Назад</a>
+<h2>Комментарии</h2>
+<div id="comments">
+    {% for comment in comments %}
+    <div class="comment">
+        <p><strong>{{ comment[1] }}</strong> ({{ comment[3] }}):</p>
+        <p>{{ comment[2] }}</p>
+    </div>
+    {% else %}
+    <p>Нет комментариев.</p>
+    {% endfor %}
+</div>
+
+<h2>Добавить комментарий</h2>
+<form action="" method="POST">
+   <label for="content">Имя:</label>
+    <input id="content" name="content" required>
+
+     <label for="author_name">Комментарий:</label>
+    <textarea id="author_name" name="author_name" required></textarea>
+    <button type="submit">Добавить комментарий</button>
+
+</form>
+</body>
+</html>
